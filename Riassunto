@@ -1,0 +1,877 @@
+\documentclass[12pt,a4paper,oneside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[document]{ragged2e}
+\usepackage{fullpage}
+\usepackage[margin=2cm]{geometry}
+\usepackage{forest}
+\usepackage[T1]{fontenc}
+\usepackage{enumitem}
+\usepackage{relsize}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\setcounter{MaxMatrixCols}{50}
+\setcounter{section}{-1}
+
+\renewcommand{\chaptername}{Capitolo}
+\renewcommand{\contentsname}{Indice}
+
+\begin{document}
+
+%%%%%%%%%%%%	TITOLO, AUTORE E INDICE 	%%%%%%%%%%%%
+
+\title{Riassunto di Algebra Lineare}
+\author{Riccardo Montagnin e Leonardo Bragagnolo}
+\date{}
+
+\maketitle
+
+\tableofcontents
+
+%/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+%%%%%%%%%%%% PRIMO CAPITOLO - SPAZI VETTORIALI %%%%%%%%%%%%
+
+				\chapter{Spazi vettoriali}
+
+			  %%%%%%	Teoria di base	%%%%%
+
+				\section{Teoria di base}
+
+
+\begin{itemize}
+
+\item \textbf{Spazio vettoriale.} \linebreak
+	  Uno spazio vettoriale su $\mathbb{K}$ campo è un insieme $V$ su cui sono definite due operazioni:
+
+	  \begin{enumerate}
+	  \item \textbf{Somma} (+)
+	  \item \textbf{Prodotto per scalare} ($\cdot$)
+	  \end{enumerate}
+
+	  le quali restituiscono un risultato appartenente ancora a V
+
+\item \textbf{Sottospazio vettoriale.}
+	  \linebreak Un sottospazio vettoriale su $\mathbb{K}$ campo è un sottoinsieme $W$ di uno spazio 		
+	  vettoriale chiuso rispetto la somma e il prodotto per scalare. Ovvero \break $\forall w_1, ..., w_n 
+	  \in W$ e $\lambda \in \mathbb{K} \Rightarrow w_1+w_2 \in W$ e $\lambda w_n \in W$
+
+\item \textbf{Span dei vettori $v_1, ..., v_n$}. \linebreak
+	  Viene definito sottospazio generato dai vettori $v_1, ..., v_n$ l'insieme di tutte le possibili 
+	  combinazioni lineari di $v_1, ..., v_n$. \hfill \break
+	  Inoltre $Span(v_1, ..., v_n) = \{\alpha_1 v_1 + ... +\alpha_kv_n\}$.
+
+\item \textbf{Vettori linearmente dipendenti}. \linebreak
+	  Un insieme di vettori $v_1, ..., v_n$ si dice linearmente dipendente se esistono $\alpha_1, ..., 
+	  \alpha_k$ non tutti nulli tali che $\alpha_1v_1, ..., \alpha_nv_n = \underline{0}$.
+
+\item \textbf{Vettori linearmente indipendenti}. \linebreak 
+	  Un insieme di vettori $v_1, ..., v_n$ si dice linearmente indipendente se esistono $\alpha_1, ..., 
+	  \alpha_n$ tali che se $\alpha_1v_1, ..., \alpha_nv_n = \underline{0}$ allora  $\alpha_i = 0$ $
+	  \forall i$.
+
+\item \textbf{Base di uno spazio vettoriale}. \linebreak
+	  Sia $V$ spazio vettoriale su $\mathbb{K}$. Allora l'insieme $B = \{v_1, ..., v_n\}$ viene definito 
+	  base di $v$ se:
+	
+	  \begin{enumerate}
+	  \item $V = Span\{v_1, ..., v_n\}$ ovvero $v_1, ..., v_n$ generano V
+	  \item I vettori $v_1, ..., v_n$ sono linearmente indipendenti.
+	  \end{enumerate}
+
+\item \textbf{Teorema del completamento}. \linebreak
+	  Sia $B = \{v_1, ..., v_n\}$ base di $V$ e siano $w_1, ..., w_r$ vettori linearmente indipendenti 
+	  ($r\leq n$), allora esistono $n-r$ vettori di $B$ tali che insieme a $w_1, ..., w_r$ formano una 
+	  base di $V$.
+
+\item \textbf{Dimensione di uno spazio vettoriale}. \linebreak
+	  Viene definita dimensione di uno spazio vettoriale finito generato $V$ il numero di vettori che 
+	  compongono una qualsiasi base, e viene indicato con $dimV$.
+
+\item \textbf{Intersezione di due spazi vettoriali}. \linebreak
+	  Siano $U, W$ sottospazi vettoriali di $V$ ($U, W \leq V$) su $\mathbb{K}$ allora viene definito 
+	  sottospazio intersezione il sottospazio vettoriale \hfill \break
+	  $$U \cap W = \{v \in V \hspace{0.1cm}|\hspace{0.1cm} v\in U \text{\hspace{0.1cm}e\hspace{0.1cm}} v
+	  \in W\}$$
+
+\item \textbf{Somma di due spazi vettoriali}. \linebreak
+	  Siano $U, W$ sottospazi vettoriali di $V$ ($U, W \leq V$) su $\mathbb{K}$ allora viene definito 
+	  sottospazio somma il sottospazio vettoriale
+	  $$U + W = \{u + w \hspace{0.1cm}|\hspace{0.1cm} u\in U \text{\hspace{0.1cm}e\hspace{0.1cm}} w\in W
+	  \}$$
+	
+\item \textbf{Somma diretta di due sottospazi vettoriali}. \linebreak
+	  Siano $U, W$ sottospazi vettoriali di $V$ ($U, W \leq V$) su $\mathbb{K}$ allora $V$ viene definito
+	  somma diretta di $U$ e $W$ se:
+	  
+	  \begin{enumerate}
+	  \item $V = U + W$
+	  \item $U \cap W = \{0\}$
+	  \end{enumerate}
+	  
+	  e in tal caso si indica con $V = U \oplus W$
+
+
+\end{itemize}
+
+\newpage
+
+		     %%%%%%	Tecniche di calcolo	%%%%%
+			   \section{Tecniche di calcolo}
+
+
+\begin{enumerate}
+
+\item \textbf{Verificare che un insieme è sottospazio vettoriale}. \linebreak
+	  Per verificare che un insieme è sottospazio vettoriale bisogna verificare che la somma tra due 
+	  vettori che appartengono all'insieme di partenza e il prodotto tra un vettore dell'insieme e uno 
+	  scalare del campo $\mathbb{K}$ producano dei vettori che appartengono ancora all'insieme di 
+	  partenza.
+
+
+\item \textbf{Verificare che un insieme non è sottospazio vettoriale}. \linebreak
+	  Per verificare che un insieme non è sottospazio vettoriale è necessario trovare due vettori che 
+	  appartengono all'insieme di partenza ma la cui somma non appartiene a tale insieme, oppure un 
+	  vettore che appartiene all'insieme di partenza ma che, moltiplicato per uno scalare del campo $
+	  \mathbb{K}$ non appartiene più a tale insieme. Questi vengono anche chiamati controesempi.
+	
+
+\item \textbf{Verificare se una serie di vettori sono linearmente (in)dipendenti}. \linebreak
+	  Per verificare se una serie di vettori dati sono linearmente dipendenti o meno, è necessario andare
+	  a moltiplicarli per dei coefficienti $\alpha, \beta, ..., \omega$, quindi sommarli tra loro e porre
+	  la somma uguale al vettore nullo $\underline{0}$. Risolvendo il sistema di equazioni, si
+	  determinerà dunque se la soluzione dovesse essere $\alpha = \beta = ... = \omega = 0$ (in tal caso
+	  i vettori saranno linearmente indipendenti) oppure no. \linebreak
+	  \break
+	  
+	  \textbf{Esempio} \linebreak
+	  Verificare che i seguenti vettori siano linearmente indipendenti: \linebreak
+	  $v_1 = \begin{bmatrix}1\\5\\7\end{bmatrix}$ \hspace{1cm} $v_2 = \begin{bmatrix}1\\3\\4\end{bmatrix}
+	  $ \hfill \break
+	  \linebreak
+	  \linebreak
+	  \textit{Soluzione} \linebreak
+	  Prendiamo i nostri vettori, e scriviamoli come combinazione lineare moltiplicandoli per due
+	  coefficienti $\alpha$ e $\beta$, ponendo il tutto uguale al vettore nullo $\underline{0}$.
+	  \linebreak \break
+	  $\alpha \begin{bmatrix}1\\5\\7\end{bmatrix} + \beta \begin{bmatrix}1\\3\\4\end{bmatrix} =
+	  \begin{bmatrix} 0\\0\\0\end{bmatrix}$ \hfill \break \break
+	  Ora svolgiamo le opportune moltiplicazioni, e scriviamo il sistema finale: \linebreak \break
+	  $\begin{cases}\alpha\cdot 1+\beta\cdot 1 = 0\\ \alpha\cdot 5 + \beta\cdot 3 = 0 \\ \alpha\cdot 7 +
+	  \beta\cdot 4 =0 \end{cases} \Rightarrow \hspace{0.5cm}\begin{cases}\alpha+\beta = 0\\ 5\alpha + 
+	  3\beta = 0 \\ 7\alpha + 4\beta =0 \end{cases} \Rightarrow \hspace{0.5cm} \begin{cases}\alpha=-\beta
+	  \\ -5\beta + 3\beta = 0 \\ -7\beta + 4\beta =0 \end{cases} \Rightarrow \hspace{0.5cm} \begin{cases}
+	  \alpha =0 \\ \beta=0 \end{cases}$ \hfill \break \break
+	  Come si è visto, dunque, i due vettori sono linearmente indipendenti.
+	
+\end{enumerate}
+
+
+
+%/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+\newpage
+
+%%%%%%%%%%%% SECONDO CAPITOLO - MATRICI %%%%%%%%%%%%
+				\chapter{Matrici}
+
+			%%%%%%	Teoria di base	%%%%%
+			   \section{Teoria di base}
+
+\begin{itemize}
+
+\item \textbf{Matrice trasposta}. \linebreak
+	  Sia $A\in M_{n,n}(\mathbb{K)}$ una matrice, viene definita matrice trasposta di $A$ la matrice 	
+	  $$A^{T}=(\overline{a}_{i,j}) \text{\hspace{0.1cm} dove \hspace{0.1cm}}\overline{a}_{i,j} = a_{j,i} 
+	  \hspace{0.1cm} \forall \hspace{0.1cm}i, j$$ \hfill 
+	  \break ovvero la matrice che ha come righe le colonne di $A$.
+	
+\item \textbf{Proprietà delle matrici trasposte} \linebreak
+	  Siano $A,B\in M_{n,n}(\mathbb{K)}$ e $\lambda\in \mathbb{K}$. Allora:
+	  
+	  \begin{enumerate}
+	  \item $(\lambda A)^T=\lambda(A^T)$
+	  \item $(A+B)^T=A^T+B^T$
+	  \item $(A^T)^T=A$
+	  \item $(A\cdot B)^T = B^T\cdot A^T$
+	  \end{enumerate}
+	
+\item \textbf{Matrici simmetriche/antisimmetriche}. \linebreak
+	  Sia $A\in M_{n,n}(\mathbb{K)}$ allora $A$ viene definita matrice simmetrica se:
+	  $$A^T=A$$
+	  mentre viene definita antisimmetrica se:
+	  $$A^T=-A$$
+	
+\item \textbf{Proprietà del prodotto tra matrici} \linebreak
+	  Siano $A,B, C\in M_{n,n}(\mathbb{K)}$ e $\lambda\in \mathbb{K}$. Allora:
+	  
+	  \begin{enumerate}
+	  \item $(AB)C = (AB)C$ e $\lambda(AB) = (\lambda A)B$
+	  \item $AI_n  = I_nA = A$ con $I_n$ = matrice identità di dimensione n
+	  \item $A(B+C) = AB + AC$
+	  \item $A\underline{0}=\underline{0}A=\underline{0}$
+	  \end{enumerate}
+	
+\item \textbf{Matrice inversa}. \linebreak
+	  Sia $A \in M_{n,n}(\mathbb{K)}$, essa è invertibile se esiste $B\in M_{n,n}(\mathbb{K)}$ tale che:
+	  $$AB=BA=I_n$$
+	  e, in tal caso, $B$ viene detta inversa di $A$ e si indica con $B=A^{-1}$
+	
+\item \textbf{Matrici simili}. \linebreak
+	  Due matrici $A,B \in M_{n,n}(\mathbb{K)}$ vengono dette simili se esiste $C\in M_{n,n}(\mathbb{K)}$
+	  tale che: $$A=C^{-1}BC$$
+	
+\item \textbf{Il determinante}. \linebreak
+	  Sia $A \in M_{n,n}(\mathbb{K)}$, essa è invertibile se $detA \neq 0$.
+	
+\item \textbf{Matrice $A_{i, k}$}.
+	  Sia $A \in M_{n,n}(\mathbb{K)}$, la matrice $A_{i, j}$ è la matrice ottenuta da $A$ cancellando la 
+	  riga i-esima e la colonna j-esima. Inoltre $A_{i, j} \in M_{n-1,n-1}(\mathbb{K)}$.
+	
+\item \textbf{Cofattore}.
+	  Viene definito cofattore lo scalare dato dalla formula: $$c_{i, j} = (-1)^{i+j}det(A_{i, i})$$
+	
+
+
+\end{itemize}
+
+\newpage
+
+		     %%%%%%	Tecniche di calcolo	%%%%%
+			  \section{Tecniche di calcolo}
+			   
+
+\begin{enumerate}
+
+\item \textbf{Calcolare il prodotto tra due matrici}. \linebreak
+	  Siano $A,B \in M_{n,n}(\mathbb{K)}$ matrici: \hfill \break
+	  $\begin{bmatrix}a_{1,1} & a_{1, 2} \\a_{2,1} & a_{2, 2} \\\end{bmatrix}$ \hspace{2cm}
+	  $\begin{bmatrix}b_{1,1} & b_{1, 2} \\b_{2,1} & b_{2, 2} \\\end{bmatrix}$ \hfill \break
+	 allora la matrice moltiplicazione sarà la matrice:
+	 $$\begin{bmatrix}a_{1,1}\cdot b_{1, 1} + a_{1, 2}\cdot b_{2, 1} & a_{1, 1}\cdot b_{1, 2} + a_{1, 2}
+	 \cdot b_{2, 2}\\a_{2_1}\cdot b_{1, 1} + a_{2, 2}\cdot b_{2, 1} & a_{2, 1}\cdot b_{1, 2}+a_{2, 2}
+	 \cdot b_{2, 2} \\\end{bmatrix}$$
+	
+\item \textbf{Calcolare la matrice inversa di una matrice $A$}. \linebreak
+	  Sia data $A \in M_{n,n}(\mathbb{K)}$, per calcolare la matrice inversa $A^{-1}$ è necessario scrivere
+	  la matrice $[A|I_n]$ e dunque, tramite operazioni elementari sulle righe, ridurre la matrice $[A|I_n]
+	  $ a matrice $[I_n|B]$, dove $B$ sarà uguale ad $A^{-1}$. \hfill \break
+	  \linebreak
+	  \textbf{Esempio} \linebreak
+	  Sia $A=\begin{bmatrix}1 & 2 \\ 3& 7   \end{bmatrix}$. Calcolare $A^{-1}$. \hfill \break
+	
+	  \textit{Soluzione} \linebreak
+	  Scriviamo $[A|I_n]$ e ricodunciamola ad $[I_n|A]$.
+	  $$[A|I_n] = \begin{bmatrix}1 & 2 & | & 1 & 0 \\ 3& 7 & | & 0 & 1   \end{bmatrix} \leadsto 
+	  \begin{bmatrix}1 & 0 & | & 7 & -2 \\ 0& 1 & | & -3 & 1   \end{bmatrix}$$
+	  A questo punto la matrice $B=\begin{bmatrix}7 & -2 \\ -3 & 1   \end{bmatrix}$ sarà equivalente ad $A^
+	  {-1}$ e lo si verifica facendo il prodotto $A^{-1}\cdot A$ che dovrà essere uguale ad $I_n$.
+	  $$A^{-1}A = \begin{bmatrix}7 & -2 \\-3 & 1   \end{bmatrix} \cdot \begin{bmatrix}1 & 2 \\ 3& 7   
+	  \end{bmatrix} = \begin{bmatrix}1 & 0 \\ 0 & 1   \end{bmatrix}$$
+
+\item \textbf{Calcolo del determinante di una matrice}.
+	  Sia $A \in M_{n,n}(\mathbb{K)}$, per calcolare il determinante di $A$ è necessario effettuare lo
+	  sviluppo di Laplace rispetto una qualsiasi riga o colonna di $A$, ovvero: 
+	  $$detA = a_{i, 1}c_{i, 1} + ... + a_{i, n}c_{i, n}$$
+	  oppure
+	  $$detA = a_{1, j}c_{1, j} + ... + a_{n, j}c{n, j}$$
+	  
+\end{enumerate}
+
+%/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+\newpage
+
+%%%%%%%%%%%% TERZO CAPITOLO - APPLICAZIONI LINEARI %%%%%%%%%%%%
+				\chapter{Applicazioni lineari}
+
+			%%%%%%	Teoria di base	%%%%%
+			   \section{Teoria di base}
+			
+\begin{itemize}
+
+\item \textbf{Teorema di struttura delle soluzioni di un sistema omogeneo}. \linebreak
+	  Sia $X_0\in\mathbb{K}$ una soluzione particolare del sistema lineare $Ax=b$ di ordine w, con
+	  $A\in M_{n, n}\in\mathbb{K}$.
+	  Allora ogni altra soluzione del sistema si scrive come $v=x_0+w$ dove $w$ è una soluzione di $Ax
+	  = \underline{0}$; ovvero se $W=\{w\in\mathbb{K}^n$ | $Aw=\underline{0}\}$ le soluzioni di $Ax=b$
+	  saranno: \linebreak
+	  $$x_0+W:=\{x_0+w\hspace{0.1cm} |\hspace{0.1cm} w\in W\}$$
+	
+\item \textbf{Mappa}. \linebreak
+	  Sia $A\in M_{n,n}(\mathbb{K)}$, viene definita mappa l'applicazione lineare: \hfill \break
+	  $$L_A : \underset{\underline{x}}{\mathbb{K}^n} \underset{\longmapsto}{\rightarrow}
+	  \underset{Ax}{\mathbb{K}^n}$$
+	
+\item \textbf{Applicazione lineare}. \linebreak
+	  Siano $V, W$ spazi vettoriali. Viene definita applicazione (o funzione) lineare tra $V$ e $W$
+	  la mappa $L:V\rightarrow W$ su $\mathbb{K}$ tale che:
+	  
+	  \begin{enumerate}
+	  \item $L(v_i+w_i) = L(v_i) + L(w_i)$\hspace{0.5cm} $\forall v_i, w_i \in V$
+	  \item $L(\lambda v) = \lambda L(v)$\hspace{0.5cm} $\forall \lambda \in \mathbb{K}$ e $v\in V$
+	  \end{enumerate}
+	
+\item \textbf{Nucleo di una applicazione lineare}. \linebreak
+	  Sia $T:V\rightarrow W$ un'applicazione lineare. Viene definito nucleo (o kernel) di $T$ l'insieme
+	  dei vettori di uno spazio vettoriale su $\mathbb{K}$ tale che $T(v)=0$. Ovvero
+	  $$Ker T=\{v\in V\hspace{0.1cm} |\hspace{0.1cm} T(v)=0\}$$
+	
+\item \textbf{Immagine di un'applicazione lineare}. \linebreak
+	  Sia $T:V\rightarrow W$ un'applicazione lineare. Viene definita immagine di $T$ l'insieme
+	  delle applicazioni
+	  $$Im T=\{T(v)\hspace{0.1cm} |\hspace{0.1cm} v\in V\}$$ \hfill \break
+	  \linebreak
+	  Inoltre se $B=\{v_1, ..., v_n\}$ è base di V, allora $ImT =Span(T(v_1), ..., T(v_n))$
+	
+\item \textbf{Rango di un'applicazione lineare}. \linebreak
+	  Viene definito rango di un'applicazione lineare $T:V\rightarrow W$ la dimensione dell'immagine
+	  di T. \hfill
+	  $$rgT=dim(ImT)$$
+	
+\item \textbf{Teorema della dimensione}. \linebreak
+	  Sia $T:V\rightarrow W$ un'applicazione lineare. Allora: $$dimV=dim(KerT) + rgT$$
+	
+\item \textbf{Corollario del Teorema della dimensione}. \linebreak
+	  Sia $T:V\rightarrow W$ un'applicazione lineare. Allora:
+	  
+	  \begin{enumerate}
+	  \item $T$ è iniettiva $\Leftrightarrow rgT = dimV$
+	  \item $T$ è suriettiva $\Leftrightarrow rgT = dimW$
+	  \item Se $dimV=dimW$ ovvero $V0=W$ allora $T$ è iniettiva $\Leftrightarrow$ è suriettiva
+	  \end{enumerate}
+	
+\item \textbf{Teorema di Rouché-Capelli}. \linebreak
+	  Sia $Ax=b$ un sistema lineare di $m$ equazioni in $n$ incognite. Sia $A\in M_{n, n}(\mathbb{K})$ e
+	  sia $[A|b]$ la matrice completa. Allora:
+	  
+	  \begin{enumerate}
+	  \item Il sistema ammette soluzione $\Leftrightarrow rgA=rg[A|b]$
+	  \item La soluzione, se esiste, è unica $\Leftrightarrow rgA = n$
+	  \end{enumerate}
+	
+\item \textbf{Composizione di due applicazioni lineari}. \linebreak
+	  Siano $T:U\rightarrow V$ e $T:V\rightarrow W$ applicazioni lineari di spazi vettoriali su $\mathbb{K}
+	  $.
+	  \hfill \break Viene definita composizione di S e T l'applicazione lineare:
+	  $$T\circ S : \underset{\underline{u}}{U} \underset{\longmapsto}{\rightarrow}
+	  \underset{T(S(u))}{W}$$
+	
+\item \textbf{Inversa}. \linebreak
+	  Sia $T:V\rightarrow W$ applicazione lineare invertibile tale che esiste $S:W\rightarrow V$ lineare 
+	  tale che: $$Id_V = S\circ T = T\circ S = Id_W$$ allora $S$ viene detta inversa di $T$ e si indica con 
+	  $S= T^{-1}$
+
+\end{itemize}
+
+
+\newpage
+
+		     %%%%%%	Tecniche di calcolo	%%%%%
+			  \section{Tecniche di calcolo}
+			  
+\begin{enumerate}
+\item \textbf{Verificare che un'applicazione è lineare}. \linebreak
+	  Per verificare che un un'applicazione è lineare bisogna verificare che l'applicazione alla somma di 
+	  due vettori coincide con la somma delle applicazioni dei singoli vettori. Inoltre bisogna verificare 
+	  che l'applicazione di un vettore moltiplicato per uno scalare del campo $\mathbb{K}$ coincida con la 
+	  moltiplicazione di tale scalare per l'applicazione dello stesso vettore. \linebreak
+	  Ovvero sia $T:V\rightarrow W$ un'applicazione lineare e sia $\lambda \in \mathbb{K}$ uno scalare, 
+	  allora:
+	  
+	  \begin{enumerate}
+	  \item $T(v_1+v_2) = T(v_1) + T(v_2)$
+	  \item $T(\lambda v) = \lambda T(v)$
+	  \end{enumerate}
+
+
+\item \textbf{Calcolare la composizione di due applicazioni lineari}. \linebreak
+	  Per calcolare la composta di due applicazioni lineari $T$ ed $S$ è necessario scrivere le matrici
+	  associate a $T$ ed $S$ e moltiplicarle tra loro.
+	
+\end{enumerate}
+
+
+%/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+\newpage
+%%%%%%%%%%%% QUARTO CAPITOLO - SISTEMI LINEARI A SCALA %%%%%%%%%%%%
+				 \chapter{Sistemi lineari a scala}
+
+				  %%%%%%	Teoria di base	%%%%%
+			   		  \section{Teoria di base}
+			   
+\begin{itemize}
+
+\item \textbf{Matrice a scala}. \linebreak
+	  Viene definita matrice a scala $m\times n$ a coefficienti in $\mathbb{K}$ la matrice:
+	  $$\begin{bmatrix}
+	  0 & 0 & p_1 & * & * & * & * \\
+	  . & . & 0 & 0 & 0 & p_2 & * \\
+	  . & . & . & . & . & 0 & 0 \\
+  	  . & . & . & . & . & . & . & \hspace{1cm} p_n \\
+	  . & . & . & . & . & . & . & \hspace{1cm} 0 & . & . & . & 0 \\
+	  . & . & . & . & . & . & . & \hspace{1cm} . & . & . & . & . \\
+	  . & . & . & . & . & . & . & \hspace{1cm} . & . & . & . & . \\
+	  . & . & . & . & . & . & . & \hspace{1cm} . & . & . & . & . \\
+	  0 & 0 & 0 & 0 & 0 & 0 & 0 & \hspace{1cm} 0 & . & . & . & 0 \\
+	  \end{bmatrix}$$
+	  Inoltre i termini nei posti $p_1, ..., p_n$ vengono detti $pivot$, e sono elementi diversi da $0$ con 
+	  $0$ sotto e a sinistra di essi.
+	
+\item \textbf{Sistema lineare a scala}. \linebreak
+	  Viene definito sistema lineare a scala un sistema la cui matrice (incompleta) dei coefficienti è a 
+	  scala.
+	
+\item \textbf{Proprietà delle matrici a scala}. \linebreak
+	  Sia $S\in M_{m, n}(\mathbb{K})$ una matrice a scala di pivot $p_1, ..., p_r$ tutti diversi da $0$ 
+	  situati nelle colonne $j_1, ..., j_r$. Allora:
+	  
+	  \begin{enumerate}
+	  \item $ImS = Span\{e_1, ..., e_r\}$
+	  \item $rgS = r$
+	  \item Una base di $ImS$ è $\left\{S^{j_1}, ..., S^{j_r}\right\}$, ovvero le colonne della matrice
+	  	    che contengono i pivot.
+	  \end{enumerate}
+
+\end{itemize}
+	
+	
+\newpage
+		     %%%%%%	Tecniche di calcolo	%%%%%
+			  \section{Tecniche di calcolo}
+			  
+\begin{enumerate}
+
+\item \textbf{Ridurre una matrice a scala}. \linebreak
+	  Per ridurre una matrice a scalare è necessario effettuare una serie di operazioni elementari sulle 
+	  righe della matrice, al fine di eliminare gli elementi sottostanti e a sinistra dei pivot portandoli 
+	  a 0. Le operazioni consentite sulle righe sono le seguenti:
+	  
+	  \begin{enumerate}
+	  \item Scambio di righe: $R_i \leftrightarrow R_j$
+	  \item Moltiplicazione di una riga per uno scalare diverso da 0: $R_i \rightarrow \lambda R_i$
+	  \item Somma di una riga ad un'altra $R_i \rightarrow R_i+R_j$
+	  \item Somma di una riga moltiplicata per uno scalare (anche =0) ad un'altra $R_i \rightarrow \lambda 
+	  		R_j + R_i$
+	  \end{enumerate}
+	
+\item \textbf{Risolvere un sistema lineare}. \linebreak
+	  Per risolvere un sistema lineare nella forma $Ax=b$ è necessario:
+	  \begin{enumerate}
+	  \item Ridurre a scala la matrice associata a tale sistema $[A|b]$.
+	  \item Una volta ridotto a scala il sistema avrà soluzione $\Leftrightarrow rg[S|c] = rgS$. \hfill
+	        \break Inoltre se $rgS=rg[S|c]=n$ allora la soluzione sarà unica, altrimenti se $rgS=rg[S|c]<n$
+	        esisteranno infinite soluzioni. In altre parole:
+	        
+	        \begin{itemize}
+	  		\item Se $rgS \neq rg[S|c] \Rightarrow \nexists $ alcuna soluzione
+	  		\item Se $rgS=rg[S|c]=n \Rightarrow dim(KerS) = n-rgS = n-n = 0 \Rightarrow \exists $! 
+	  			  soluzione	
+	  		\item Se $rgS=rg[S|c]<n \Rightarrow dim(KerS) = n-rgS > 0 \Rightarrow \exists$ $\infty$ 
+	  		      soluzioni
+			\end{itemize}
+			
+	  \end{enumerate}
+	
+\item \textbf{Trovare rango e base dell'immagine di uno $Span$} \linebreak
+	  Per trovare il rango e la base dell'immagine di uno $Span{(v_1, ..., v_n)}$ è necessario:
+	  
+	  \begin{enumerate}
+	  \item Scrivere la matrice associata $Ax=b$ e ridurla a scala trovando la matrice $Sx=c$.
+	  \item Identificare le colonne di $A$ corrispondenti alle colonne di $S$ nelle quali si trovano i 
+	    	pivot.
+	  \item Base di $ImA = (A^i, ..., A^j)$ dove $i...j$ sono gli indici delle colonne di $S$ nelle quali 
+	    	sono presenti i pivot.
+	  \end{enumerate}
+	
+\item \textbf{Base e dimensione del nucleo di una applicazione}. \linebreak
+	  Per trovare la base e la dimensione del nucleo di una applicazione è necessario:
+	  
+	  \begin{enumerate}
+	  \item Ridurre a scala la matrice $A$ e contare il numero di pivot. A questo punto $rgA =$ numero 
+	  	  	pivot.
+	  \item Per trovare la dimenione del $KerA$ è necessario fare $dim(KerA)=n-rgA=n-rgA$.
+	  \item Per trovare la base del $KerA$ è necessario risolvere il sistema omogeneo associato $Ax=
+	   		\underline{0}$ e, se vi è soluzione, la base di $KerA =(v_1, ..., v_r)$ dove $KerA=\{t_1v_1+...
+	  		+t_rv_r \hspace{0.1cm} | \hspace{0.1cm} t_1, ..., t_r \in \mathbb{K}\}$
+	  \end{enumerate}
+
+\item \textbf{Trovare la base e dimensione di uno Spazio Vettoriale Generato ($Span$)}. \linebreak
+	  Per trovare la base di uno $Span$ di una  serie di vettori $v_1, ..., v_n$ è necessario porli come 
+	  colonne di una matrice $A$ e dunque applicare il procedimento per trovare rango e base dell'immagine
+	  di uno $Span$ visto nel punto 3.
+	
+\item \textbf{Completare un insieme $\{v_1, ..., v_r\}$ di vettori linearmente indipendenti in $\mathbb{K}
+			  ^n$}. \linebreak
+	  Siano $v_1, ..., v_r \in \mathbb{K}^n$ linearmente indipendenti. Allora esistono vettori di $e_1, 
+	  ..., e_n$ (base canonica) tali che $\mathbb{K} = Span(v_1, ..., v_r, e_1, ..., e_{n-r})$.\hfill 
+	  \break Posso dunque estrarre una base con il metodo del punto 5.
+
+\end{enumerate}
+
+
+%/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+\newpage
+%%%%%%%%%%%% QUINTO CAPITOLO - MATRICI DIAGONALIZZABILI %%%%%%%%%%%%
+				\chapter{Matrici diagonalizzabili}
+
+
+				  %%%%%%	Teoria di base	%%%%%
+			   		  \section{Teoria di base}
+
+\begin{itemize}
+
+\item \textbf{Autovettori e autovalori}. \linebreak
+	  Sia $T:V\rightarrow W$ un'applicazione lineare di $V$ spazio vettoriale su $\mathbb{K}$, e sia 
+	  $v_0\in V$. L'elemento $v_0$ viene definito autovettore per $T$ relativo all'autovalore $\lambda \in 
+	  \mathbb{K} $ se:
+	  
+	  \begin{enumerate}
+	  \item $v_0 \neq \underline{0}$
+	  \item $T(v_0) = \lambda v_0$
+	  \end{enumerate}
+	
+\item \textbf{Autospazio}. \linebreak
+	  Sia $T:V\rightarrow W$ un'applicazione lineare e sia $\lambda$ un autovalore per $T$, allora viene 
+	  definito autospazio relativo a $\lambda$ il seguente insieme:
+	  $$V_{\lambda}=\{v\in V \hspace{0.1cm}|\hspace{0.1cm} T(v) = \lambda V\}$$
+	
+\item \textbf{Matrice diagonalizzabile}. \linebreak
+	  Sia $A\in M_{n,n}(\mathbb{K)}$, essa viene detta diagonalizzabile se e solo se è simile alla matrice
+	  diagonale, ovvero se esiste $P\in M_{n,n}(\mathbb{K)}$ tale che:
+	  $$P^{-1}AP = D$$
+	
+\item \textbf{Polinomio caratteristico}. \linebreak
+	  Sia $T:V\rightarrow V$ una trasformazione lineare, $B=\{v_1, ..., v_n\} base di V$ e $A\in M_{n,n}
+	  (\mathbb{K)}$ la matrice associata a $T$ rispetto la base $B$, allora:
+	  
+	  \begin{enumerate}
+	  \item La funzione $p_T:\mathbb{K} \rightarrow \mathbb{K}$ viene detta polinomio caratteristico ed
+	    	equivale a $p_T(x) = det(A-xI_n)$
+	  \item Il polinomio caratteristico $p_T(x)$ è un polinomio di grado $n=dimV$ in $x$
+	  \item Dato $\lambda\in\mathbb{K}$, questo è autovalore per $T \Leftrightarrow p_T(\lambda)=0$
+	  \end{enumerate}
+	
+\item \textbf{Molteplicità algebrica e geometrica}. \linebreak
+	  Sia $T:V\rightarrow V$ una trasformazione lineare e $\lambda\in\mathbb{K}$ un autovalore per $T$.
+	  Viene definita molteplicità algebri di $\lambda$, se esiste, $n$ tale che $(x-\lambda)^n$ divide 
+	  $p_T(x)$, ma $(x-\lambda)^{n+1}$ non divide $p_T(x)$, e si indica con $$m_a(\lambda) = n$$
+	  Inoltre viene definita molteplicità geometrica di $\lambda$ come $$m_g(\lambda) = dimV_{\lambda}$$
+	
+\item \textbf{Teorema}. \linebreak
+	  Sia $T:V\rightarrow V$ una trasformazione lineare di $V$ spazio vettoriale su $\mathbb{K}$. Allora 
+	  sono equivalenti le seguenti affermazioni:
+	  
+	  \begin{enumerate}
+	  \item $T$ è diagonalizzabile su $\mathbb{K}$
+	  \item $p_T(x)$ ha $n = dimV$ radici contate con molteplicità in $\mathbb{K}$ e, per ogni radice $
+	  		\lambda$ $m_a(\lambda) = m_g(\lambda)$
+	  \item La somma delle molteplicità geometriche è $n = dimV$
+	  \end{enumerate}
+	
+\item \textbf{Teorema}. \linebreak
+	  Sia $T:V\rightarrow V$ una trasformazione lineare, questa è diagonalizzabile se e solo se esistono $n
+	  $ autovettori $v_1, ..., v_n$ tali che $P[v_1 ... v_n]$ è invertibile e, in tal caso $$P^{-1}AP =
+	  \begin{bmatrix}
+	  \lambda_1 \\
+	    & \lambda_2\\
+	    &   &  .\\
+	    &   &   &   .\\
+	    &   &   &   &   .\\
+	    &   &   &   &   & \lambda_n \\
+	  \end{bmatrix}$$
+	  dove $\lambda_i$ è autovalore associato a $v_i$.
+
+\end{itemize}
+
+
+\newpage
+		     %%%%%%	Tecniche di calcolo	%%%%%
+			  \section{Tecniche di calcolo}
+			  
+\begin{enumerate}
+\item \textbf{Calcolo degli autovalori}. \linebreak
+	  Sia $A\in M_{n, n}(\mathbb{K})$, per determinare gli autovalori è necessario trovare il polinomio
+	  caratteristico tramite la formula $$p_T(x) = det(A-xI_n)$$ e dunque trovare i valori che annullano 
+	  tale polinomio. Essi saranno gli autovalori della matrice $A$.
+	
+\item \textbf{Calcolo degli autovettori associati ad un autovalore}. \linebreak
+	  Sia $A\in M_{n, n}(\mathbb{K})$ e sia $\lambda\in\mathbb{K}$ un autovalore di $A$, per trovare gli
+	  autovettori associati a $\lambda$ è necessario calcolare la base di $V_{\lambda}$ dove
+	  $$V_{\lambda} = Ker(A-\lambda I_n) = \{\text{soluzioni del sistema } A-\lambda I_n = 0\}$$
+	
+\item \textbf{Calcolo della matrice diagonalizzante $P$ e diagonale $D$}. \linebreak
+	  Sia $A\in M_{n, n}(\mathbb{K})$ e siano $v_1, ..., v_n$ gli autovettori associati agli autovalori
+	  $\lambda_1, ..., \lambda_n$.\hfill \break
+	  La matrice diagonalizzante $P$ sarà uguale a: $$P = [v_1\text{ }...\text{ }v_n]$$
+	  mentre la matrice diagonale $D= P^{-1}AP$ sarà uguale a
+	  $$D=\begin{bmatrix}
+	  \lambda_1 \\
+	    & \lambda_2\\
+	    &   &  .\\
+	    &   &   &   .\\
+	    &   &   &   &   .\\
+	    &   &   &   &   & \lambda_n \\
+	  \end{bmatrix}$$
+	
+\end{enumerate}
+
+
+
+
+
+%/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+\newpage
+%%%%%%%%%%%% QUINTO CAPITOLO - PRODOTTI SCALARI %%%%%%%%%%%%
+		\chapter{Prodotti scalari su $\mathbb{R}^n$}
+
+
+			  %%%%%%	Teoria di base	%%%%%
+			   	 \section{Teoria di base}
+			   	 
+\begin{itemize}
+
+\item \textbf{Prodotto scalare (canonico).} \linebreak
+	  Viene definito prodotto scalare (canonico) di due vettori $v$ e $w \in\mathbb{R}^n$ il prodotto del
+	  primo vettore trasposto per il secondo:
+	  $$<v, w> = v^Tw$$
+	  Ovvero $$<\cdot, \cdot>:\underset{(v, w)}{\mathbb{R}^n\times \mathbb{R}^n} \underset{\mapsto}
+	  {\rightarrow} \underset{v^Tw}{\mathbb{R}}$$
+	
+\item \textbf{Norma di un vettore}. \linebreak
+	  Viene definita norma (lunghezza) di un vettore $v\in\mathbb{R}^n$ come:
+	  $$||v|| = \sqrt{v^Tv}=\sqrt{<v, v>}$$
+	
+\item \textbf{Distanza tra due vettori}. \linebreak
+	  Viene definita distanza tra due vettori $v, w\in\mathbb{R}^n$ come: $$d(v, w) = ||v-w||$$
+	
+\item \textbf{Proprietà del prodotto scalare}. \linebreak
+	  \begin{enumerate}
+	  \item Linearità rispetto le variabili. \linebreak
+		    Siano $v, v_1, v_2, w, w_1, w_2\in\mathbb{R}^n$ e $\lambda\in \mathbb{R}$. Allora: \hfill 
+		    \break
+		    $<v_1+v_2, w> = <v_1, w> + <v_2, w>$ \hfill \break
+		    $<v, w_1+w_2> = <v, w_1> + <v, w_2>$ \hfill \break
+		    $<\lambda v, w> = \lambda <v, w>$ \hfill \break
+		    $<v, \lambda w> = \lambda <v, w>$
+	  \item Simmetria. \linebreak
+		    Siano $v, w\in\mathbb{R}^n$, allora: \hfill \break
+		    $<v, w> = <w, v>$
+	  \end{enumerate}
+	
+\item \textbf{Angolo tra due vettori}. \linebreak
+	  Viene definito angolo tra due vettori $v, w\in\mathbb{R}^n$ non nulli come l'angolo $\theta\in[0, 
+	  \pi]$ tale che: $$cos\theta = \frac{<v, w>}{||v||\cdot||w||}$$
+	
+\item \textbf{Ortogonalità di due vettori}. \linebreak
+	  Due vettori vengono detti ortogonali (perpendicolari) tra loro se $$<v, w> = 0$$ e, in tal caso, si 
+	  indica con $v\perp w$
+	
+\item \textbf{Base ortogonale}. \linebreak
+	  Viene definita base ortogonale di $\mathbb{R}^n$ una base composta da vettori a due a due ortogonali.
+	
+\item \textbf{Versore}.
+	  Viene definito versore un vettore la cui norma (lunghezza) è pari a $1$.
+	
+\item \textbf{Base ortonormale}. \linebreak
+	  Viene definita base ortonormale di $\mathbb{R}^n$ una base ortogonale i cui elementi hanno tutti 
+	  norma (lunghezza) pari a $1$ (sono tutti versori).
+	
+\item \textbf{Osservazione}. \linebreak
+	  Siano $v_1, ..., v_n$ vettori di una base ortonormale. Allora $$<v_i, v_j> = \delta_{ij}$$ dove
+	  $$\delta_{ij}=\begin{cases}
+	  1 \hspace{0.2cm} i=j \\
+	  0 \hspace{0.2cm} i\neq j\\
+	  \end{cases}$$
+	
+\item \textbf{Osservazione}. \linebreak
+	  Sia $v\in\mathbb{R}^n$ un vettore, $v\neq\underline{0}$. Allora $\frac{v}{||v||}$ ha norma $1$.
+	
+\item \textbf{Teorema}. \linebreak
+	  Sia $V\leq \mathbb{R}^n$ e $v_1, ..., v_n$ generatori di $V$ con $v_i\neq\underline{0}\forall i$.
+	  Allora esistono $w_1, ..., w_r$ generatori di $V$ tali che:
+	  
+	  \begin{enumerate}
+	  \item $Span(w_1, ..., w_j) = Span(v_1, ..., v_j) \hspace{0.2cm} \forall j\leq r$
+	  \item $w_j\perp Span(w_1, ..., w_{j-1}) \hspace{0.2cm} \forall j=2, ..., r $
+	  \item $<w_j, v_j> = 0 \hspace{0.2cm} \forall j$
+	  \end{enumerate}	
+	
+\item \textbf{Proposizione}. \linebreak
+	  Sia $V$ spazio vettoriale $\leq\mathbb{R}^n$ e sia $U\leq V$. Allora $\forall v\in V$ $\exists !$
+	  $u_0\in U$ tale che: $$v-u_0 \perp u$$
+	
+\item \textbf{Proiezione ortogonale}. \linebreak
+	  Sia $U\leq V\leq \mathbb{R}^n$. Viene definita proiezione ortogonale di $v$ su $u$ la mappa lineare
+	  $$p_u = proj_u: \underset{v}{V} \underset{\mapsto}{\rightarrow} \underset{u_0 = p_u(v)}{U} $$
+	  tale che:
+	  
+	  \begin{enumerate}
+	  \item $proj_u(v) \in U$
+	  \item $v-proj_u(v) \perp U$
+	  \end{enumerate}
+	  
+	  Inoltre $proj_u(v) = \sum\limits_{i=1}^r \frac{<v, u_i>}{<u_i, u_i>}\cdot u_i$
+	
+\item \textbf{Complemento ortogonale}. \linebreak
+	  Sia $S\subseteq \mathbb{R}^n$. Viene definito $$S^{\perp} = \{v\in\mathbb{R}^n \hspace{0.1cm} |
+	  \hspace{0.1cm} v\perp S\}$$
+	  Se $S=V\leq\mathbb{R}^n$ allora $V^{\perp}$ viene definito complemento ortogonale di $V$ in $
+	  \mathbb{R} ^n$
+	
+\item \textbf{Proposizione}. \linebreak
+	  Sia $U\leq \mathbb{R}^n$, allora:
+	  
+	  \begin{enumerate}
+	  \item $\mathbb{R}^n = U\oplus U^{\perp}$
+	  \item $dimU^{\perp} = n-dimU$
+	  \item $\forall v\in\mathbb{R}^n$ $\exists !$ $v_{\parallel}\in U$ e $v_{\perp}\in U_{\perp}$ tale che
+		    $v = v_{\parallel} + v_{\perp}$
+	  \item $||v|| = ||v_{\parallel}|| + ||v_{\perp}||$
+	  \end{enumerate}
+	
+
+\end{itemize}
+
+
+\newpage
+		     %%%%%%	Tecniche di calcolo	%%%%%
+			  \section{Tecniche di calcolo}
+			  
+\begin{enumerate}
+
+\item \textbf{Calcolare la base ortogonale di uno $Span$}. \linebreak
+	  Dato $V = Span(v_1, ..., v_n)$ per calcolare una sua base ortogonale è necessario applicare il 
+	  procedimento di ortogonalizzazione di Gram-Schmidt che consiste in due passaggi:
+	 
+	  \begin{enumerate}
+	  \item Porre il primo vettore $v_1 = w_1$
+	  \item Calcolare il vettore j-esimo tramite la formula
+		    $$w_j = v_j - \sum_{k=1}^{j-1}\left(\frac{<v_j, w_k>}{<w_k, w_k>}\right) $$
+	  \end{enumerate}
+
+\item \textbf{Calcolare la base ortonormale di uno $Span$}. \linebreak
+	  Dato $V = Span(v_1, ..., v_n)$ per calcolare una sua base ortonormale è necessario prima calcolare la
+	  base ortogonale tramite il procedimento del punto 1 e, successivamente, normalizzare tutti i vettori
+	  dividendoli per la propria norma.
+	
+\item \textbf{Calcolare dimensione e base del complemento ortogonale di uno $Span$}. \linebreak
+	  Dato $U = Span(v_1, ..., v_n)$ per calcolare la dimensione di $U^{\perp}$ bisogna applicare la 
+	  formula: $$dimU^{\perp} = dimV - rgA$$
+	  dove $$dimV = n \text{ e } A=\begin{bmatrix}
+	  v_1 & v_2 & ... & v_n\\
+	  \end{bmatrix}$$
+	  Per calcolare la base di $U^{\perp}$ bisogna invece risolvere il sistema omogeneo $Cx=0$ dove
+	  $$C = \begin{bmatrix}
+	  v_1^T \\ \\ v_2^T \\ . \\ . \\ . \\  \\ v_n^T
+	  \end{bmatrix}$$
+	 
+\item \textbf{Calcola la proiezione di un vettore su uno $Span$}. \linebreak
+	  Sia $w \in\mathbb{R}^n$ un vettore, e sia $V = Span\{v_1, ..., v_n\}$. Per calcolare la proiezione di
+	  $w$ su $V$ è necessario applicare la seguente formula:
+	  $$proj_V(w) = \sum_{k=1}^{n}\left(\frac{<v_k, w>}{<v_k, v_k>}\right)$$
+	
+\item \textbf{Calcolare le coordinate di un vettore rispetto la base di uno $Span$}. \linebreak
+	  Sia $w \in\mathbb{R}^n$ un vettore, e sia $V = Span\{v_1, ..., v_n\}$. Per calcolare le coordinate di
+	  $w$ rispetto la base $v_1, ..., v_n$ di $V$ è necessario:
+	  
+	  \begin{enumerate}
+	  \item Applicare la formula per il calcolo di $proj_V(w)$.
+	  \item Gli scalari $\frac{<v_k, w>}{<v_k, v_k>}$ con $1\leq k\leq n$ saranno le coordinate rispetto a
+	  $v_1, ..., v_n$, ovvero rispetto la base di $V$, di $w$.
+	  \end{enumerate}
+
+\end{enumerate}
+
+
+
+
+%/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+\newpage
+%%%%%%%%%%%% SESTO CAPITOLO - MATRICI ORTOGONALI %%%%%%%%%%%%
+				\chapter{Matrici ortogonali}
+				
+
+			  %%%%%%	Teoria di base	%%%%%
+			   	 \section{Teoria di base}
+			   	 
+\begin{itemize}
+
+\item \textbf{Matrice ortogonale}. \linebreak
+	  Sia $P\in M_{n, n}(\mathbb{R})$ una matrice, essa viene detta ortogonale se:
+	  
+	  \begin{enumerate}
+	  \item è invertibile
+	  \item $P^{-1} = P^T$ ovvero $PP^T = In = P^TP$
+	  \end{enumerate}
+	
+\item \textbf{Teorema}. \linebreak
+	  Sia $P\in M_{n, n}(\mathbb{R})$, essa è ortogonale se e solo se le colonne di $P$ sono base 
+	  ortonormale di $\mathbb{R}^n$, ovvero se le righe di $P$ sono base ortonormale di $\mathbb{R}^n$.
+	
+\item \textbf{Isometria}. \linebreak
+	  Sia $T: \mathbb{R}^n \rightarrow \mathbb{R}^n$ una trasformazione lineare, essa viene definita 
+	  isometria se: $$<T(v_1, v_2)> = <v_1, v_2>$$
+	
+\item \textbf{Matrice ortogonalmente diagonalizzabile}. \linebreak
+	  Sia $A\in M_{n, n}(\mathbb{R})$, essa viene definita ortogonalmente diagonalizzabile se esiste $P$
+	  tale che:
+	  
+	  \begin{enumerate}
+	  \item $P$ è ortogonale
+	  \item $P^{-1}AP (= P^TAP)$ è diagonale
+	  \end{enumerate}
+	
+\item \textbf{Corollario del Teorema degli Assi Principali}. \linebreak
+	  Sia $A\in M_{n, n}(\mathbb{R})$, allora essa è ortogonalmente diagonalizzabile se e solo se è 
+	  simmetrica.
+	
+\item \textbf{Teorema Spetrale}. \linebreak
+	  Sia $T: \mathbb{R}^n \rightarrow \mathbb{R}^n$ un'applicazione lineare. Allora $T$ è simmetrica se e
+	  solo se è ortogonalmente diagonalizzabile.
+	
+\item \textbf{Lemma Teorema Spetrale}. \linebreak
+	  Sia $A\in M_{n, n}(\mathbb{R})$ e siano $v_1, ..., v_r$ autovettori associati agli autovalori 
+	  distinti $\lambda_1, ..., \lambda_r$. Allora $v_1, ..., v_r$ sono ortogonali tra loro, ovvero $<v_i, 
+	  v_j>= 0$ $\forall i\neq j$.
+
+\end{itemize}
+
+
+
+\newpage
+		     %%%%%%	Tecniche di calcolo	%%%%%
+			  \section{Tecniche di calcolo}
+			  
+\begin{enumerate}
+\item \textbf{Trovare la matrice $P$ ortogonale e diagonalizzante una matrice $A$}. \linebreak
+	  Sia $A\in M_{n, n}(\mathbb{R})$, per trovare $P$ ortogonale tale che $P^TAP=D$ è necessario:
+	  \begin{enumerate}
+	  \item Verificare che la matrice $A$ sia simmetrica.
+	  \item Trovare gli autovalori $\lambda_1, ..., \lambda_r$ e gli autospazi associati a tali autovalori
+		    $E_{\lambda_1}, ... E_{\lambda_r}$.
+	  \item Per ogni autospazio $E_{\lambda_i}$ trovare una base ortogonale.
+	  \item Per ogni autospazio $E_{\lambda_i}$ trovare una base ortonormale (normalizzare i vettori del 
+		    punto (c) dividendo ogni vettore $w_i$ per la sua norma $<w_i, w_i> = ||w_i||$).
+	  \item Unire le basi ortonormali degli autospazi, ovvero i vettori $\frac{w_i}{||w_i||}$. La loro
+		    unione sarà base ortonormale di $\mathbb{R}^n$ e quindi i vettori $\frac{w_i}{||w_i||}$ saranno
+		    le colonne di $P$, ovvero $$ P=\begin{bmatrix}
+		    \mathlarger{\frac{w_1}{||w_1||}} & . & . & . & \mathlarger{\frac{w_r}{||w_r||}} \end{bmatrix}$$
+	  \end{enumerate}
+
+\end{enumerate}
+
+
+
+\end{document}
